@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+  <head>
+    <title>Blood Bank Management System</title>
+    <link rel="stylesheet" href="{%static 'style.css'%}" />
+  </head>
+  <body>
+    <div id="header">
+      <img
+        src="https://cdn.pixabay.com/photo/2014/04/02/10/47/red-304570_640.png"
+        alt="Blood Bank Logo"
+        class="logo"
+        <a href="#"><button class="btn btn-success" id="backButton" style="margin-left: -385px;">Back</button
+      />
+      <script>
+        // Back button functionality
+        document.getElementById("backButton").addEventListener("click", function () {
+            window.history.back();
+        });
+    
+        // Logout functionality (your reference)
+        document.getElementById("logoutButton").addEventListener("click", function () {
+            window.location.href = "/login";
+        });
+      </script>
+  
+
+      <nav>
+        <ul>
+          <li>
+            <a href="/home">Home <i class="fa-solid fa-house"></i></a>
+          </li>
+          <li>
+            <a href="/donorlist">Donor List<i class="fa-solid fa-hospital-user"></i
+            ></a>
+          </li>
+
+<!--          <li>-->
+<!--            <a href="/AddHsp">Add Hospital<i class="fa-solid fa-user-shield"></i-->
+<!--            ></a>-->
+<!--          </li>-->
+
+          <li>
+            <a href="/ViewHsp">View Hospital<i class="fa-solid fa-droplet"></i></a>
+          </li>
+          <li>
+            <a href="/BRequestStatus">Blood Request Status<i class="fa-solid fa-user-shield"></i
+            ></a>
+          </li>
+<!--           <li>-->
+<!--            <a href="/ADDFAQ">Add FAQ<i class="fa-solid fa-user-shield"></i-->
+<!--            ></a>-->
+<!--          </li>-->
+
+           <li>
+            <a href="/BotModel">Generate Bot Model<i class="fa-solid fa-user-shield"></i
+            ></a>
+          </li>
+           <li>
+            <a href="/ViewFeedback">View Feedback</a><i class="fa-solid fa-user-shield"></i
+            ></a>
+          </li>
+          <li>
+            <a href="/login">Logout<i class="fa-solid fa-user-shield"></i
+            ></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div>
+      <div class="content">
+        <h1>FEEDBACK</h1>
+
+                {{table_data | safe}}
+      </div>
+    </div>
+  </body>
+</html>

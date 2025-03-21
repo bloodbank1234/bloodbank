@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{%load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donor Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{%static 'style.css'%}" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <div id="header">
+          <img
+            src="https://cdn.pixabay.com/photo/2014/04/02/10/47/red-304570_640.png"
+            alt="Blood Bank Logo"
+            class="logo"
+            <a href="#"><button class="btn btn-success" id="backButton" style="margin-left: 20px;">Back</button
+          />
+        </div>
+        <a class="navbar-brand" href="/"
+          >Blood Bank Management System</a
+        >
+        <a href="/donor/login"><button class="btn btn-outline-light" id="logoutButton">Logout</button></a>
+
+      </div>
+    </nav>
+    <script>
+      // Back button functionality
+      document.getElementById("backButton").addEventListener("click", function () {
+          window.history.back();
+      });
+  
+      // Logout functionality (your reference)
+      document.getElementById("logoutButton").addEventListener("click", function () {
+          window.location.href = "/login";
+      });
+    </script>
+
+    <script>
+      document
+        .getElementById("logoutButton")
+        .addEventListener("click", function () {
+          document.getElementById("logoutMessage").style.display = "block";
+          setTimeout(function () {
+            window.location.href = "index.html";
+          }, 2000);
+        });
+    </script>
+    <div class="container-fluid">
+      <div class="row">
+         <div class="col-md-2 sidebar">
+          <a href="/donor/home">Home</a>
+          <a href="/donor/profile">Profile</a>
+          <a href="/donor/Request">Donate Blood</a>
+          <a href="/donor/ViewDonations">View Donations</a>
+            <a href="/donor/chatbot">Chatbot</a>
+             <a href="/donor/ViewAlert">View Alert</a>
+             <a href="/donor/Predict">Predict Next Eligibility Months</a>
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-10">
+          <section id="patient-info">
+            <h1 class="mt-3">Donate Blood </h1>
+            <p>
+              <br>
+              <font color="red">{{msg}}</font>
+            </p>
+        <form action="/donor/RequestAction" method="POST">
+          {%csrf_token%}
+           <label for="patient-name">Select Hospital:</label>
+          <select  id="patient-hsp" name="hsp" required>
+            <option value=""></option>
+            {{data|safe}}
+          </select>
+            <label for="patient-name">Select Gender:</label>
+          <select  id="gender" name="gender" required>
+            <option value=""></option>
+            <option value="Male">Male</option>
+              <option value="Female">Female</option>
+          </select>
+
+
+
+          <label for="patient-name">Donor Full Name:</label>
+          <input type="text" id="patient-name" name="name" value="{{request.session.name}}" readonly />
+
+          <label for="patient-name">Donor Email:</label>
+          <input type="text" id="patient-email" name="email" value="{{request.session.email}}" readonly />
+
+      <label for="patient-name">Disease:</label>
+          <input type="text" id="patient-disease" name="disease" value="Nothing" required />
+
+          <label for="contact">Blood Group:</label>
+          <input type="text" id="contact" name="blood_type" value="{{request.session.blood_type}}" readonly  />
+
+           <label for="contact">No.of Units:</label>
+          <input type="text" id="units" name="b_unites" required  />
+
+          <label for="contact">Age:</label>
+          <input type="text" id="age" name="age" required  />
+
+           <label for="contact">Request Date:</label>
+          <input type="date" id="date" name="r_date" required  />
+
+
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+
+   
+
+        
+      
+         
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

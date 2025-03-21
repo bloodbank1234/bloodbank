@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+  <head>
+    <title>Blood Bank Management System</title>
+    <link rel="stylesheet" href="{%static 'style.css'%}" />
+  </head>
+  <body>
+    <div id="header">
+      <img
+        src="https://cdn.pixabay.com/photo/2014/04/02/10/47/red-304570_640.png"
+        alt="Blood Bank Logo"
+        class="logo"
+      />
+
+       <nav>
+        <ul>
+          <li>
+            <a href="/">Home <i class="fa-solid fa-house"></i></a>
+          </li>
+          <li>
+            <a href="search">Search <i class="fa-solid fa-search"></i></a>
+          </li>
+          <li>
+            <a href="/login">Admin <i class="fa-solid fa-user-shield"></i></a>
+          </li>
+          <li>
+            <a href="/hsp/login">Hospital <i class="fa-solid fa-hospital-user"></i></a>
+          </li>
+          <li>
+            <a href="/donor/login">Donor <i class="fa-solid fa-droplet"></i></a>
+          </li>
+           <li>
+            <a href="/donor/login">FeedBack <i class="fa-solid fa-message"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div>
+      <div class="content">
+        <h1>BLOOD DONOR DETAILS</h1>
+
+                {{table_data | safe}}
+      </div>
+    </div>
+  </body>
+</html>

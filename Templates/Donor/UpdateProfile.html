@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+{%load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donor Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{%static 'style.css'%}" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <div id="header">
+          <img
+            src="https://cdn.pixabay.com/photo/2014/04/02/10/47/red-304570_640.png"
+            alt="Blood Bank Logo"
+            class="logo"
+          />
+        </div>
+        <a class="navbar-brand" href="/"
+          >Blood Bank Management System</a
+        >
+        <a href="/donor/login"><button class="btn btn-outline-light" id="logoutButton">Logout</button></a>
+
+      </div>
+    </nav>
+    <script>
+      document
+        .getElementById("logoutButton")
+        .addEventListener("click", function () {
+          document.getElementById("logoutMessage").style.display = "block";
+          setTimeout(function () {
+            window.location.href = "index.html";
+          }, 2000);
+        });
+    </script>
+    <div class="container-fluid">
+      <div class="row">
+         <div class="col-md-2 sidebar">
+          <a href="/donor/home">Home</a>
+          <a href="/donor/profile">Profile</a>
+          <a href="/donor/Request">Donate Blood</a>
+          <a href="/donor/ViewDonations">View Donations</a>
+            <a href="/donor/chatbot">Chatbot</a>
+             <a href="/donor/ViewAlert">View Alert</a>
+             <a href="/donor/Predict">Predict Next Eligibility Months</a>
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-10">
+
+  <section id="patient-info">
+       <h1 class="mt-3">UPDATE PROFILE HERE </h1>
+        <p>
+          <br>
+          <font color="red">{{msg}}</font>
+        </p>
+     <script>
+    // Function to get URL parameters
+    function getQueryParam(param) {
+        let params = new URLSearchParams(window.location.search);
+        return params.get(param);
+    }
+
+    // Run after the page loads
+    window.onload = function() {
+        let bType = getQueryParam("b_type");
+        if (bType) {
+            document.getElementById("b_type").value = decodeURIComponent(bType);
+        }
+    };
+</script>
+        <form action="/donor/UpdateAction" method="POST">
+          {%csrf_token%}
+
+
+        <label for="id">ID:</label>
+          <input type="text" id="d_units" name="d_id" value="{{id}}" readonly  />
+
+           <label for="mobile">Mobile:</label>
+          <input type="text" id="date" name="mobile" value="{{mobile}}" required  />
+
+            <label for="blood-type">Blood Type:</label>
+        <select id="blood-type" name="blood_type" required>
+            <option value="">--select Blood Type--</option>
+          <option value="A+">A+</option>
+          <option value="B+">B+</option>
+          <option value="AB+">AB+</option>
+          <option value="O+">O+</option>
+          <option value="A-">A-</option>
+          <option value="B-">B-</option>
+          <option value="AB-">AB-</option>
+          <option value="O-">O-</option>
+        </select>
+
+
+          <button type="submit">UPDATE</button>
+        </form>
+      </section>
+
+    
+
+        </div>
+      </div>
+    </div>
+<script>
+  // Get today's date
+  const today = new Date();
+
+  // Calculate the date three years ago
+  const threeYearsAgo = new Date();
+  threeYearsAgo.setFullYear(today.getFullYear() - 3);
+
+  // Format dates as YYYY-MM-DD
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  // Set the min and max attributes for the input field
+  document.getElementById('date').setAttribute('min', formatDate(threeYearsAgo));
+  document.getElementById('date').setAttribute('max', formatDate(today));
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
