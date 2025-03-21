@@ -1,4 +1,5 @@
 from unittest.mock import inplace
+from .chatbot_model import handle_chat_query
 
 from django.shortcuts import render
 import Database
@@ -480,3 +481,11 @@ def PredictAction(request):
         print(f'Next eligible donation in {predicted_months[0]:.2f} months')
         context = {'result': f'Next eligible donation in {pred_months} months'}
         return render(request, 'Donor/ViewPrediction.html', context)
+
+def chat_action(request):
+    """Process chatbot queries and return responses"""
+    if request.method == 'GET':
+        user_text = request.GET.get('mytext', '')
+        response = handle_chat_query(user_text)
+        return HttpResponse(response)
+    return HttpResponse("Error processing request")
