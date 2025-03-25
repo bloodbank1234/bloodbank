@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="{%static 'style.css'%}" />
+
+  </head>
+  <body>
+    <div id="header">
+      <img
+        src="https://cdn.pixabay.com/photo/2014/04/02/10/47/red-304570_640.png"
+        alt="Blood Bank Logo"
+        class="logo"
+      />
+        <nav>
+        <ul>
+          <li>
+            <a href="/">Home <i class="fa-solid fa-house"></i></a>
+          </li>
+          <li>
+            <a href="/search">Search <i class="fa-solid fa-search"></i></a>
+          </li>
+          <li>
+            <a href="/login">Admin <i class="fa-solid fa-user-shield"></i></a>
+          </li>
+          <li>
+            <a href="/hsp/login">Hospital <i class="fa-solid fa-hospital-user"></i></a>
+          </li>
+          <li>
+            <a href="/donor/login">Donor <i class="fa-solid fa-droplet"></i></a>
+          </li>
+           <li>
+            <a href="/feedback">FeedBack <i class="fa-solid fa-message"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <section id="login">
+      <h1>Donor Login</h1>
+      <font color="red">{{msg}}</font>
+      <form action="/donor/LogAction" method="post">
+        {%csrf_token%}
+        <label for="email">Email ID</label>
+        <input type=email id="email" name="email" required />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+
+        <button type="submit">Login</button>
+&nbsp;
+      </form>
+
+      Don't Have An Account ? <a href="/donor/Register">Register</a>
+    </section>
+  </body>
+</html>
